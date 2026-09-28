@@ -15,18 +15,22 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
 
-    steps:
-      - name: Descargar código
-        uses: actions/checkout@v4
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
 
-      - name: Configurar Pages
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Setup Pages
         uses: actions/configure-pages@v5
 
-      - name: Preparar sitio
-        uses: actions/upload-pages-artifact@v3
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v4
         with:
-          path: .
+          path: '.'
 
-      - name: Publicar CAT
+      - name: Deploy to GitHub Pages
+        id: deployment
         uses: actions/deploy-pages@v4
-
