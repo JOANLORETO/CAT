@@ -1,8 +1,6 @@
 ```javascript
-// Año automático en el pie de página
 document.getElementById("year").textContent = new Date().getFullYear();
 
-// Formulario de contacto
 const contactForm = document.getElementById("contactForm");
 
 contactForm.addEventListener("submit", function(event) {
@@ -13,28 +11,22 @@ contactForm.addEventListener("submit", function(event) {
     const servicio = document.getElementById("servicio").value;
     const mensaje = document.getElementById("mensaje").value;
 
-    // Correo de CAT
     const correoDestino = "jorgeloreto@consultant.com";
 
     const asunto = encodeURIComponent("Solicitud de asesoría - CAT");
 
     const cuerpo = encodeURIComponent(
-        `Hola CAT,
-
-Nombre: ${nombre}
-
-Correo: ${correo}
-
-Servicio solicitado: ${servicio}
-
-Mensaje:
-${mensaje}
-
-Enviado desde el sitio web de CAT.`
+        "Hola CAT,\n\n" +
+        "Nombre: " + nombre + "\n\n" +
+        "Correo: " + correo + "\n\n" +
+        "Servicio solicitado: " + servicio + "\n\n" +
+        "Mensaje:\n" + mensaje + "\n\n" +
+        "Enviado desde el sitio web de CAT."
     );
 
-    // Abrir el correo del visitante
     window.location.href =
-        `mailto:${correoDestino}?subject=${asunto}&body=${cuerpo}`;
+        "mailto:" + correoDestino +
+        "?subject=" + asunto +
+        "&body=" + cuerpo;
 });
 ```
