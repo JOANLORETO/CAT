@@ -1,124 +1,306 @@
-// =========================
-// AÑO AUTOMÁTICO
-// =========================
+// =========================================
+// AÑO AUTOMÁTICO DEL SITIO
+// =========================================
 
-const year = document.getElementById("year");
-
-if (year) {
-    year.textContent = new Date().getFullYear();
-}
+document.getElementById("year").textContent =
+    new Date().getFullYear();
 
 
-// =========================
+// =========================================
 // FORMULARIO DE CONTACTO
-// =========================
+// =========================================
 
-const contactForm = document.getElementById("contactForm");
+const contactForm =
+    document.getElementById("contactForm");
 
-if (contactForm) {
 
-    contactForm.addEventListener("submit", function (event) {
+contactForm.addEventListener("submit", function(event) {
 
-        event.preventDefault();
+    event.preventDefault();
 
-        const nombre = document.getElementById("nombre").value.trim();
-        const correo = document.getElementById("correo").value.trim();
-        const servicio = document.getElementById("servicio").value;
-        const mensaje = document.getElementById("mensaje").value.trim();
 
-        const correoDestino = "jorgeloreto@consultant.com";
+    const nombre =
+        document.getElementById("nombre").value;
 
-        const asunto = encodeURIComponent(
+    const correo =
+        document.getElementById("correo").value;
+
+    const servicio =
+        document.getElementById("servicio").value;
+
+    const mensaje =
+        document.getElementById("mensaje").value;
+
+
+    const correoDestino =
+        "jorgeloreto@consultant.com";
+
+
+    const asunto =
+        encodeURIComponent(
             "Solicitud de asesoría - CAT"
         );
 
-        const cuerpo = encodeURIComponent(
+
+    const cuerpo =
+        encodeURIComponent(
+
             "Hola CAT,\n\n" +
-            "Nombre: " + nombre + "\n\n" +
-            "Correo: " + correo + "\n\n" +
-            "Servicio solicitado: " + servicio + "\n\n" +
-            "Mensaje:\n" + mensaje + "\n\n" +
+
+            "Nombre: " +
+            nombre +
+            "\n\n" +
+
+            "Correo: " +
+            correo +
+            "\n\n" +
+
+            "Servicio solicitado: " +
+            servicio +
+            "\n\n" +
+
+            "Mensaje:\n" +
+            mensaje +
+            "\n\n" +
+
             "Enviado desde el sitio web de CAT."
+
         );
 
-        window.location.href =
-            "mailto:" +
-            correoDestino +
-            "?subject=" +
-            asunto +
-            "&body=" +
-            cuerpo;
 
-    });
+    window.location.href =
+        "mailto:" +
+        correoDestino +
+        "?subject=" +
+        asunto +
+        "&body=" +
+        cuerpo;
+
+});
+
+
+// =========================================
+// GATO INTERACTIVO CAT
+// =========================================
+
+const catInteractive =
+    document.getElementById("catInteractive");
+
+const catMessage =
+    document.getElementById("catMessage");
+
+const catButton =
+    document.getElementById("catButton");
+
+
+const catMessages = [
+
+    "¡Hola! Soy CAT 🐱",
+
+    "¡Miau! 😺",
+
+    "¿Necesitas ayuda?",
+
+    "¡Bienvenido a CAT!",
+
+    "🐾 Estoy aquí para ayudarte",
+
+    "¡Vamos a aprender!",
+
+    "💻 Tecnología y conocimiento",
+
+    "📚 ¿Listo para continuar?",
+
+    "😸 ¡Qué bueno verte!",
+
+    "🐱 Miau miau",
+
+    "🚀 ¡Sigamos avanzando!",
+
+    "💡 El conocimiento abre puertas"
+
+];
+
+
+let catMessageTimer;
+
+
+// =========================================
+// MOSTRAR MENSAJE
+// =========================================
+
+function showCatMessage(text) {
+
+    catMessage.textContent = text;
+
+    catMessage.classList.add("show");
+
+    clearTimeout(catMessageTimer);
+
+    catMessageTimer = setTimeout(function() {
+
+        catMessage.classList.remove("show");
+
+    }, 3000);
 
 }
 
 
-// =========================
-// ANIMACIÓN AL HACER SCROLL
-// =========================
+// =========================================
+// INTERACCIÓN CON EL GATO
+// =========================================
 
-const elements = document.querySelectorAll(
-    ".service-card, .about-content, .contact-grid"
-);
+function interactWithCat() {
 
-const observer = new IntersectionObserver(
-    function (entries) {
+    const randomMessage =
+        catMessages[
+            Math.floor(
+                Math.random() * catMessages.length
+            )
+        ];
 
-        entries.forEach(function (entry) {
 
-            if (entry.isIntersecting) {
+    showCatMessage(randomMessage);
 
-                entry.target.style.opacity = "1";
-                entry.target.style.transform = "translateY(0)";
 
-                observer.unobserve(entry.target);
-            }
+    catInteractive.classList.remove("jump");
 
-        });
 
-    },
-    {
-        threshold: 0.12
+    void catInteractive.offsetWidth;
+
+
+    catInteractive.classList.add("jump");
+
+}
+
+
+// =========================================
+// CLICK SOBRE EL GATO
+// =========================================
+
+catInteractive.addEventListener(
+    "click",
+    function(event) {
+
+        if (event.target === catButton) {
+            return;
+        }
+
+        interactWithCat();
+
     }
 );
 
 
-elements.forEach(function (element) {
+// =========================================
+// BOTÓN DEL GATO
+// =========================================
 
-    element.style.opacity = "0";
-    element.style.transform = "translateY(25px)";
-    element.style.transition =
-        "opacity 0.7s ease, transform 0.7s ease";
+catButton.addEventListener(
+    "click",
+    function(event) {
 
-    observer.observe(element);
+        event.stopPropagation();
 
-});
+        interactWithCat();
+
+    }
+);
 
 
-// =========================
-// NAVEGACIÓN SUAVE
-// =========================
+// =========================================
+// OJOS SIGUEN EL CURSOR
+// =========================================
 
-document.querySelectorAll('a[href^="#"]').forEach(function (link) {
+const catPupils =
+    document.querySelectorAll(".cat-pupil");
 
-    link.addEventListener("click", function (event) {
 
-        const targetId = this.getAttribute("href");
+document.addEventListener(
+    "mousemove",
+    function(event) {
 
-        const target = document.querySelector(targetId);
+        catPupils.forEach(function(pupil) {
 
-        if (target) {
+            const eye =
+                pupil.parentElement;
 
-            event.preventDefault();
 
-            target.scrollIntoView({
-                behavior: "smooth",
-                block: "start"
-            });
+            const rect =
+                eye.getBoundingClientRect();
 
-        }
 
-    });
+            const eyeX =
+                rect.left +
+                rect.width / 2;
 
-});
+
+            const eyeY =
+                rect.top +
+                rect.height / 2;
+
+
+            const angle =
+                Math.atan2(
+                    event.clientY - eyeY,
+                    event.clientX - eyeX
+                );
+
+
+            const distance = 5;
+
+
+            const x =
+                Math.cos(angle) *
+                distance;
+
+
+            const y =
+                Math.sin(angle) *
+                distance;
+
+
+            pupil.style.transform =
+                `translate(${x}px, ${y}px)`;
+
+        });
+
+    }
+);
+
+
+// =========================================
+// MENSAJE INICIAL
+// =========================================
+
+setTimeout(function() {
+
+    showCatMessage(
+        "¡Hola! Soy la mascota de CAT 🐱"
+    );
+
+}, 1500);
+
+
+// =========================================
+// MENSAJES AUTOMÁTICOS
+// =========================================
+
+setInterval(function() {
+
+    if (Math.random() > 0.6) {
+
+        const randomMessage =
+            catMessages[
+                Math.floor(
+                    Math.random() *
+                    catMessages.length
+                )
+            ];
+
+
+        showCatMessage(randomMessage);
+
+    }
+
+}, 12000);
