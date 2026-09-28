@@ -3,611 +3,536 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CAT - Mascota Interactiva</title>
 
-    <title>CAT | Consultoría Académica y Tecnológica</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
-    <meta
-        name="description"
-        content="CAT ofrece consultoría académica y tecnológica, preparación académica, soporte tecnológico y desarrollo de software."
-    >
+        body {
+            min-height: 100vh;
+            font-family: Arial, sans-serif;
+            background: #0b1020;
+            color: white;
+            overflow-x: hidden;
+        }
 
-    <link rel="stylesheet" href="style.css">
+        /* ===== MASCOTA ===== */
+
+        .cat-container {
+            position: fixed;
+            right: 30px;
+            bottom: 25px;
+            width: 180px;
+            z-index: 9999;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .cat-message {
+            position: absolute;
+            bottom: 190px;
+            right: 0;
+            min-width: 160px;
+            max-width: 220px;
+            padding: 12px 16px;
+            border-radius: 18px;
+            background: white;
+            color: #111827;
+            font-size: 14px;
+            text-align: center;
+            box-shadow: 0 8px 25px rgba(0,0,0,.35);
+            opacity: 0;
+            transform: translateY(10px) scale(.9);
+            transition: .3s ease;
+            pointer-events: none;
+        }
+
+        .cat-message.show {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        .cat {
+            position: relative;
+            width: 150px;
+            height: 150px;
+            margin: auto;
+            animation: floating 3s ease-in-out infinite;
+        }
+
+        /* Cabeza */
+
+        .head {
+            position: absolute;
+            width: 120px;
+            height: 105px;
+            left: 15px;
+            top: 25px;
+            background: #f5a623;
+            border-radius: 50% 50% 45% 45%;
+            box-shadow: inset -8px -8px 0 rgba(0,0,0,.08);
+        }
+
+        /* Orejas */
+
+        .ear {
+            position: absolute;
+            width: 48px;
+            height: 55px;
+            top: -22px;
+            background: #f5a623;
+            clip-path: polygon(50% 0, 100% 100%, 0 100%);
+        }
+
+        .ear.left {
+            left: 3px;
+            transform: rotate(-18deg);
+        }
+
+        .ear.right {
+            right: 3px;
+            transform: rotate(18deg);
+        }
+
+        .ear::after {
+            content: "";
+            position: absolute;
+            width: 24px;
+            height: 30px;
+            left: 12px;
+            top: 12px;
+            background: #f58c9c;
+            clip-path: polygon(50% 0, 100% 100%, 0 100%);
+        }
+
+        /* Ojos */
+
+        .eye {
+            position: absolute;
+            width: 28px;
+            height: 32px;
+            top: 40px;
+            background: white;
+            border-radius: 50%;
+            overflow: hidden;
+        }
+
+        .eye.left {
+            left: 25px;
+        }
+
+        .eye.right {
+            right: 25px;
+        }
+
+        .pupil {
+            position: absolute;
+            width: 13px;
+            height: 18px;
+            top: 7px;
+            left: 8px;
+            background: #111827;
+            border-radius: 50%;
+            transition: .15s ease;
+        }
+
+        .eye::after {
+            content: "";
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            top: 6px;
+            left: 6px;
+            background: white;
+            border-radius: 50%;
+        }
+
+        /* Nariz */
+
+        .nose {
+            position: absolute;
+            width: 15px;
+            height: 12px;
+            left: 52px;
+            top: 73px;
+            background: #e87992;
+            border-radius: 50% 50% 60% 60%;
+        }
+
+        /* Boca */
+
+        .mouth {
+            position: absolute;
+            left: 55px;
+            top: 83px;
+            width: 22px;
+            height: 12px;
+            border-bottom: 3px solid #542d2d;
+            border-radius: 50%;
+        }
+
+        /* Bigotes */
+
+        .whisker {
+            position: absolute;
+            width: 48px;
+            height: 2px;
+            background: #fff;
+            opacity: .9;
+        }
+
+        .whisker.w1 {
+            left: -35px;
+            top: 72px;
+            transform: rotate(10deg);
+        }
+
+        .whisker.w2 {
+            left: -35px;
+            top: 82px;
+            transform: rotate(-5deg);
+        }
+
+        .whisker.w3 {
+            right: -35px;
+            top: 72px;
+            transform: rotate(-10deg);
+        }
+
+        .whisker.w4 {
+            right: -35px;
+            top: 82px;
+            transform: rotate(5deg);
+        }
+
+        /* Cuerpo */
+
+        .body {
+            position: absolute;
+            width: 95px;
+            height: 75px;
+            left: 28px;
+            top: 110px;
+            background: #f5a623;
+            border-radius: 50% 50% 35% 35%;
+            z-index: -1;
+        }
+
+        /* Cola */
+
+        .tail {
+            position: absolute;
+            width: 70px;
+            height: 70px;
+            right: -20px;
+            bottom: -5px;
+            border: 13px solid #f5a623;
+            border-left-color: transparent;
+            border-bottom-color: transparent;
+            border-radius: 50%;
+            transform: rotate(20deg);
+            animation: tailMove 2s ease-in-out infinite;
+        }
+
+        /* Patitas */
+
+        .paw {
+            position: absolute;
+            width: 28px;
+            height: 25px;
+            bottom: -5px;
+            background: #f5a623;
+            border-radius: 50%;
+        }
+
+        .paw.left {
+            left: 35px;
+        }
+
+        .paw.right {
+            right: 35px;
+        }
+
+        /* Animaciones */
+
+        @keyframes floating {
+            0%, 100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-8px);
+            }
+        }
+
+        @keyframes tailMove {
+            0%, 100% {
+                transform: rotate(20deg);
+            }
+
+            50% {
+                transform: rotate(45deg);
+            }
+        }
+
+        @keyframes jump {
+            0% {
+                transform: translateY(0);
+            }
+
+            40% {
+                transform: translateY(-35px) rotate(-5deg);
+            }
+
+            70% {
+                transform: translateY(-15px) rotate(5deg);
+            }
+
+            100% {
+                transform: translateY(0);
+            }
+        }
+
+        .cat.jump {
+            animation: jump .7s ease;
+        }
+
+        /* ===== BOTÓN ===== */
+
+        .cat-button {
+            display: block;
+            margin: 8px auto 0;
+            border: none;
+            background: rgba(255,255,255,.1);
+            color: white;
+            padding: 7px 13px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 12px;
+            transition: .2s;
+        }
+
+        .cat-button:hover {
+            background: rgba(255,255,255,.2);
+        }
+
+        /* ===== RESPONSIVE ===== */
+
+        @media (max-width: 600px) {
+
+            .cat-container {
+                right: 12px;
+                bottom: 15px;
+                transform: scale(.8);
+                transform-origin: bottom right;
+            }
+
+        }
+    </style>
 </head>
 
 <body>
 
-    <!-- =========================
-         HEADER
-    ========================== -->
-
-    <header class="header">
-
-        <div class="container nav">
-
-            <a href="#inicio" class="logo">
-
-                <img
-                    src="img/logo-cat.png"
-                    alt="CAT Consultoría Académica y Tecnológica"
-                >
-
-                <div class="logo-text">
-
-                    <strong>CAT</strong>
-
-                    <span>
-                        Consultoría Académica y Tecnológica
-                    </span>
-
-                </div>
-
-            </a>
-
-
-            <nav class="menu">
-
-                <a href="#inicio">
-                    Inicio
-                </a>
-
-                <a href="#servicios">
-                    Servicios
-                </a>
-
-                <a href="#nosotros">
-                    Nosotros
-                </a>
-
-                <a href="#contacto">
-                    Contacto
-                </a>
-
-            </nav>
-
-        </div>
-
-    </header>
-
-
-    <main>
-
-        <!-- =========================
-             INICIO
-        ========================== -->
-
-        <section id="inicio" class="hero">
-
-            <div class="container hero-content">
-
-                <div class="hero-text">
-
-                    <span class="tag">
-                        CONSULTORÍA ACADÉMICA Y TECNOLÓGICA
-                    </span>
-
-
-                    <h1>
-
-                        Conocimiento que
-                        <span>impulsa tus proyectos.</span>
-
-                    </h1>
-
-
-                    <p>
-
-                        En CAT brindamos orientación académica y
-                        tecnológica para estudiantes, personas y
-                        proyectos que buscan aprender, resolver
-                        problemas y aprovechar mejor la tecnología.
-
-                    </p>
-
-
-                    <div class="hero-buttons">
-
-                        <a
-                            href="#contacto"
-                            class="btn primary"
-                        >
-                            Solicitar asesoría
-                        </a>
-
-
-                        <a
-                            href="#servicios"
-                            class="btn secondary"
-                        >
-                            Ver servicios
-                        </a>
-
-                    </div>
-
-                </div>
-
-
-                <div class="hero-logo">
-
-                    <div class="logo-circle">
-
-                        <img
-                            src="img/logo-cat.png"
-                            alt="Logo CAT"
-                        >
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- =========================
-             SERVICIOS
-        ========================== -->
-
-        <section id="servicios" class="section">
-
-            <div class="container">
-
-                <div class="section-title">
-
-                    <span class="tag">
-                        SERVICIOS
-                    </span>
-
-
-                    <h2>
-                        Soluciones académicas y tecnológicas
-                    </h2>
-
-
-                    <p>
-                        Orientación personalizada para ayudarte
-                        a resolver tus necesidades y desarrollar
-                        tus proyectos.
-                    </p>
-
-                </div>
-
-
-                <div class="services-grid">
-
-
-                    <!-- SERVICIO 1 -->
-
-                    <article class="service-card">
-
-                        <div class="service-icon">
-                            🎓
-                        </div>
-
-                        <h3>
-                            Asesoría académica
-                        </h3>
-
-                        <p>
-                            Orientación para comprender temas,
-                            resolver dudas, desarrollar actividades
-                            y fortalecer el aprendizaje.
-                        </p>
-
-                    </article>
-
-
-                    <!-- SERVICIO 2 -->
-
-                    <article class="service-card">
-
-                        <div class="service-icon">
-                            📚
-                        </div>
-
-                        <h3>
-                            Preparatoria en línea
-                        </h3>
-
-                        <p>
-                            Apoyo y orientación para actividades,
-                            proyectos, trabajos y procesos
-                            académicos en línea.
-                        </p>
-
-                    </article>
-
-
-                    <!-- SERVICIO 3 -->
-
-                    <article class="service-card">
-
-                        <div class="service-icon">
-                            📝
-                        </div>
-
-                        <h3>
-                            Cursos y preparación
-                        </h3>
-
-                        <p>
-                            Orientación para cursos, evaluaciones,
-                            preparación académica y comprensión
-                            de diferentes temas.
-                        </p>
-
-                    </article>
-
-
-                    <!-- SERVICIO 4 -->
-
-                    <article class="service-card">
-
-                        <div class="service-icon">
-                            💻
-                        </div>
-
-                        <h3>
-                            Tecnología
-                        </h3>
-
-                        <p>
-                            Orientación para computadoras,
-                            teléfonos, tablets, aplicaciones
-                            y herramientas digitales.
-                        </p>
-
-                    </article>
-
-
-                    <!-- SERVICIO 5 -->
-
-                    <article class="service-card">
-
-                        <div class="service-icon">
-                            🌐
-                        </div>
-
-                        <h3>
-                            Internet y redes
-                        </h3>
-
-                        <p>
-                            Asesoría relacionada con conexiones,
-                            redes, configuración de dispositivos
-                            y herramientas de comunicación.
-                        </p>
-
-                    </article>
-
-
-                    <!-- SERVICIO 6 -->
-
-                    <article class="service-card">
-
-                        <div class="service-icon">
-                            </&zwj;👨‍💻
-                        </div>
-
-                        <h3>
-                            Desarrollo de software
-                        </h3>
-
-                        <p>
-                            Orientación en programación,
-                            desarrollo web, proyectos tecnológicos
-                            e ingeniería de software.
-                        </p>
-
-                    </article>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- =========================
-             NOSOTROS
-        ========================== -->
-
-        <section id="nosotros" class="section about">
-
-            <div class="container about-content">
-
-                <div>
-
-                    <span class="tag">
-                        SOBRE CAT
-                    </span>
-
-
-                    <h2>
-                        Educación, tecnología y conocimiento.
-                    </h2>
-
-                </div>
-
-
-                <div>
-
-                    <p>
-
-                        <strong>
-                            CAT
-                        </strong>
-
-                        significa
-                        <strong>
-                            Consultoría Académica y Tecnológica
-                        </strong>.
-
-                    </p>
-
-
-                    <p>
-
-                        Nuestro objetivo es brindar orientación
-                        clara y práctica a estudiantes y personas
-                        que necesitan apoyo en temas académicos
-                        o tecnológicos.
-
-                    </p>
-
-
-                    <p>
-
-                        También contamos con conocimientos en
-                        programación, desarrollo web, tecnología
-                        e ingeniería de desarrollo de software,
-                        permitiendo abordar proyectos desde una
-                        perspectiva académica y tecnológica.
-
-                    </p>
-
-
-                    <p>
-
-                        La atención se adapta a las necesidades
-                        de cada persona, buscando que cada consulta
-                        sea clara, útil y fácil de comprender.
-
-                    </p>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- =========================
-             CONTACTO
-        ========================== -->
-
-        <section id="contacto" class="section contact">
-
-            <div class="container">
-
-                <div class="section-title">
-
-                    <span class="tag">
-                        CONTACTO
-                    </span>
-
-
-                    <h2>
-                        ¿Necesitas orientación?
-                    </h2>
-
-
-                    <p>
-                        Cuéntanos qué necesitas y nos pondremos
-                        en contacto contigo.
-                    </p>
-
-                </div>
-
-
-                <div class="contact-grid">
-
-
-                    <!-- INFORMACIÓN -->
-
-                    <div class="contact-info">
-
-                        <h3>
-                            Hablemos
-                        </h3>
-
-
-                        <p>
-
-                            Puedes comunicarte directamente
-                            con CAT mediante WhatsApp o correo
-                            electrónico.
-
-                        </p>
-
-
-                        <div class="contact-item">
-
-                            <strong>
-                                WhatsApp
-                            </strong>
-
-
-                            <a
-                                href="https://wa.me/523412411661"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                            >
-                                +52 341 241 1661
-                            </a>
-
-                        </div>
-
-
-                        <div class="contact-item">
-
-                            <strong>
-                                Correo electrónico
-                            </strong>
-
-
-                            <a
-                                href="mailto:jorgeloreto@consultant.com"
-                            >
-                                jorgeloreto@consultant.com
-                            </a>
-
-                        </div>
-
-                    </div>
-
-
-                    <!-- FORMULARIO -->
-
-                    <div class="contact-form">
-
-                        <form id="contactForm">
-
-
-                            <label for="nombre">
-                                Nombre
-                            </label>
-
-
-                            <input
-                                type="text"
-                                id="nombre"
-                                name="nombre"
-                                placeholder="Escribe tu nombre"
-                                required
-                            >
-
-
-                            <label for="correo">
-                                Correo electrónico
-                            </label>
-
-
-                            <input
-                                type="email"
-                                id="correo"
-                                name="correo"
-                                placeholder="tu@email.com"
-                                required
-                            >
-
-
-                            <label for="servicio">
-                                ¿En qué podemos ayudarte?
-                            </label>
-
-
-                            <select
-                                id="servicio"
-                                name="servicio"
-                                required
-                            >
-
-                                <option value="">
-                                    Selecciona un servicio
-                                </option>
-
-                                <option value="Asesoría académica">
-                                    Asesoría académica
-                                </option>
-
-                                <option value="Preparatoria en línea">
-                                    Preparatoria en línea
-                                </option>
-
-                                <option value="Cursos y preparación">
-                                    Cursos y preparación
-                                </option>
-
-                                <option value="Tecnología">
-                                    Tecnología
-                                </option>
-
-                                <option value="Internet y redes">
-                                    Internet y redes
-                                </option>
-
-                                <option value="Desarrollo de software">
-                                    Desarrollo de software
-                                </option>
-
-                            </select>
-
-
-                            <label for="mensaje">
-                                Mensaje
-                            </label>
-
-
-                            <textarea
-                                id="mensaje"
-                                name="mensaje"
-                                rows="6"
-                                placeholder="Cuéntanos qué necesitas..."
-                                required
-                            ></textarea>
-
-
-                            <button
-                                type="submit"
-                                class="btn primary"
-                            >
-                                Enviar solicitud
-                            </button>
-
-                        </form>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </section>
-
+    <!-- =====================================================
+         AQUÍ VA EL CONTENIDO NORMAL DE TU PÁGINA CAT
+         ===================================================== -->
+
+    <main style="padding:40px;">
+        <h1>CAT</h1>
+        <p>Bienvenido a tu página.</p>
     </main>
 
 
-    <!-- =========================
-         FOOTER
-    ========================== -->
+    <!-- =====================================================
+         MASCOTA INTERACTIVA
+         ===================================================== -->
 
-    <footer class="footer">
+    <div class="cat-container" id="catContainer">
 
-        <div class="container">
+        <div class="cat-message" id="catMessage">
+            ¡Hola! 🐱
+        </div>
 
-            <p>
+        <div class="cat" id="cat">
 
-                ©
-                <span id="year"></span>
+            <div class="head">
 
-                CAT -
-                Consultoría Académica y Tecnológica.
+                <div class="ear left"></div>
+                <div class="ear right"></div>
 
-            </p>
+                <div class="eye left">
+                    <div class="pupil"></div>
+                </div>
 
+                <div class="eye right">
+                    <div class="pupil"></div>
+                </div>
 
-            <p>
-                Atención académica y tecnológica.
-            </p>
+                <div class="nose"></div>
+
+                <div class="mouth"></div>
+
+                <div class="whisker w1"></div>
+                <div class="whisker w2"></div>
+                <div class="whisker w3"></div>
+                <div class="whisker w4"></div>
+
+            </div>
+
+            <div class="body"></div>
+
+            <div class="tail"></div>
+
+            <div class="paw left"></div>
+            <div class="paw right"></div>
 
         </div>
 
-    </footer>
+        <button class="cat-button" id="catButton">
+            🐾 Tócame
+        </button>
+
+    </div>
 
 
-    <script src="script.js"></script>
+    <!-- =====================================================
+         JAVASCRIPT DE LA MASCOTA
+         ===================================================== -->
+
+    <script>
+
+        const catContainer = document.getElementById("catContainer");
+        const cat = document.getElementById("cat");
+        const message = document.getElementById("catMessage");
+        const button = document.getElementById("catButton");
+
+        const messages = [
+            "¡Hola! 🐱",
+            "¡Miau! 😺",
+            "¿Qué estás haciendo?",
+            "¡Qué bueno verte!",
+            "🐾 ¿Seguimos trabajando?",
+            "¡Estoy aquí!",
+            "😸 ¡Eso estuvo genial!",
+            "¡No olvides descansar!",
+            "🐱 Miau miau",
+            "¡Bienvenido a CAT!"
+        ];
+
+        let messageTimer;
+
+        function showMessage(text) {
+
+            message.textContent = text;
+
+            message.classList.add("show");
+
+            clearTimeout(messageTimer);
+
+            messageTimer = setTimeout(() => {
+                message.classList.remove("show");
+            }, 3000);
+        }
+
+        function catInteraction() {
+
+            const randomMessage =
+                messages[Math.floor(Math.random() * messages.length)];
+
+            showMessage(randomMessage);
+
+            cat.classList.remove("jump");
+
+            void cat.offsetWidth;
+
+            cat.classList.add("jump");
+        }
+
+        catContainer.addEventListener("click", function(event) {
+
+            if (event.target === button) {
+                return;
+            }
+
+            catInteraction();
+
+        });
+
+        button.addEventListener("click", function(event) {
+
+            event.stopPropagation();
+
+            catInteraction();
+
+        });
+
+
+        /* =========================================
+           LOS OJOS SIGUEN EL CURSOR
+           ========================================= */
+
+        const pupils = document.querySelectorAll(".pupil");
+
+        document.addEventListener("mousemove", function(event) {
+
+            pupils.forEach(pupil => {
+
+                const rect = pupil.parentElement.getBoundingClientRect();
+
+                const eyeX = rect.left + rect.width / 2;
+                const eyeY = rect.top + rect.height / 2;
+
+                const angle = Math.atan2(
+                    event.clientY - eyeY,
+                    event.clientX - eyeX
+                );
+
+                const distance = 6;
+
+                const x = Math.cos(angle) * distance;
+                const y = Math.sin(angle) * distance;
+
+                pupil.style.transform =
+                    `translate(${x}px, ${y}px)`;
+
+            });
+
+        });
+
+
+        /* =========================================
+           MENSAJE AUTOMÁTICO
+           ========================================= */
+
+        setTimeout(() => {
+
+            showMessage("¡Hola! Soy tu mascota 🐱");
+
+        }, 1500);
+
+
+        /* =========================================
+           MENSAJES AUTOMÁTICOS CADA CIERTO TIEMPO
+           ========================================= */
+
+        setInterval(() => {
+
+            if (Math.random() > 0.65) {
+
+                const randomMessage =
+                    messages[Math.floor(Math.random() * messages.length)];
+
+                showMessage(randomMessage);
+
+            }
+
+        }, 12000);
+
+    </script>
 
 </body>
-
 </html>
