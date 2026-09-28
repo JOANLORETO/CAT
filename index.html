@@ -1,3 +1,4 @@
+```javascript
 // Año automático en el pie de página
 document.getElementById("year").textContent = new Date().getFullYear();
 
@@ -5,7 +6,6 @@ document.getElementById("year").textContent = new Date().getFullYear();
 const contactForm = document.getElementById("contactForm");
 
 contactForm.addEventListener("submit", function(event) {
-
     event.preventDefault();
 
     const nombre = document.getElementById("nombre").value;
@@ -35,7 +35,8 @@ ${mensaje}
 Enviado desde el sitio web de CAT.`
     );
 
-    // Abrir el correo del visitante para enviar el mensaje
+    // Abrir el correo del visitante
     window.location.href =
         `mailto:${correoDestino}?subject=${asunto}&body=${cuerpo}`;
 });
+```
