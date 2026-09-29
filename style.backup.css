@@ -1862,6 +1862,24 @@ select {
    SELECTOR
 ========================================= */
 
+.color-picker {
+    display: flex;
+
+    align-items: center;
+
+    gap: 6px;
+
+    padding: 7px 10px;
+
+    background:
+        rgba(5,10,15,.95);
+
+    border:
+        1px solid #263849;
+
+    border-radius: 20px;
+}
+
 .color-picker span {
     color: #71808f;
 
@@ -1872,10 +1890,59 @@ select {
     letter-spacing: 1px;
 }
 
+.color-option {
+    width: 14px;
+    height: 14px;
+
+    border-radius: 50%;
+
+    border:
+        2px solid
+        rgba(255,255,255,.3);
+
+    cursor: pointer;
+
+    padding: 0;
+
+    transition: .25s;
+}
+
 .color-option:hover {
     transform: scale(1.25);
     border-color: white;
 }
+
+.color-option.active {
+    transform: scale(1.2);
+
+    box-shadow:
+        0 0 0 2px
+        rgba(255,255,255,.12),
+
+        0 0 10px
+        currentColor;
+}
+
+.color-option.cyan {
+    background: #39d9ff;
+}
+
+.color-option.blue {
+    background: #147aff;
+}
+
+.color-option.purple {
+    background: #9b6cff;
+}
+
+.color-option.green {
+    background: #4ade80;
+}
+
+.color-option.pink {
+    background: #ff6fae;
+}
+
 
 /* =========================================
    ANIMACIONES

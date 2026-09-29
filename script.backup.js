@@ -289,6 +289,11 @@ document.addEventListener(
 // COLORES
 // =========================================
 
+const colorOptions =
+    document.querySelectorAll(
+        ".color-option"
+    );
+
 const savedColor =
     localStorage.getItem(
         "techCatColor"
@@ -296,6 +301,40 @@ const savedColor =
     "#39d9ff";
 
 
+function setColor(color) {
+
+    mascot.style.setProperty(
+        "--cat-color",
+        color
+    );
+
+    localStorage.setItem(
+        "techCatColor",
+        color
+    );
+
+
+    colorOptions.forEach(
+        function(option) {
+
+            option.classList.remove(
+                "active"
+            );
+
+            if (
+                option.dataset.color ===
+                color
+            ) {
+
+                option.classList.add(
+                    "active"
+                );
+
+            }
+
+        }
+    );
+}
 
 
 setColor(
