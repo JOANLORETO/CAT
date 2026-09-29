@@ -87,7 +87,7 @@ contactForm.addEventListener(
 
 
 // =========================================
-// MASCOTA TECH
+// MASCOTA ANDROIDE TECH
 // =========================================
 
 const catInteractive =
@@ -110,17 +110,17 @@ const catButton =
 
 const catMessages = [
 
-    "¡Hola! Soy la mascota tecnológica de TECH.",
-
     "Sistema TECH en línea.",
+
+    "¡Hola! Soy la mascota androide de TECH.",
 
     "¿Necesitas ayuda con algún proyecto?",
 
     "¡Bienvenido a TECH!",
 
-    "🐾 Tecnología y conocimiento.",
+    "🐾 Modo tecnológico activado.",
 
-    "💻 Desarrollo de software activado.",
+    "💻 Desarrollo de software listo.",
 
     "📚 ¿Listo para continuar?",
 
@@ -130,7 +130,7 @@ const catMessages = [
 
     "🌐 Conexión establecida.",
 
-    "⚡ TECH está listo para ayudarte.",
+    "⚡ Sistemas TECH funcionando.",
 
     "🔷 Explorando nuevas ideas."
 
@@ -211,7 +211,7 @@ function interactWithCat() {
 
 
 // =========================================
-// CLICK SOBRE LA MASCOTA
+// CLICK SOBRE EL ANDROIDE
 // =========================================
 
 catInteractive.addEventListener(
@@ -256,7 +256,7 @@ catButton.addEventListener(
 
 const catPupils =
     document.querySelectorAll(
-        ".bot-pupil"
+        ".android-pupil"
     );
 
 
@@ -320,7 +320,7 @@ document.addEventListener(
 
 
 // =========================================
-// COLOR DEL GATO
+// CAMBIO DE COLOR
 // =========================================
 
 const colorOptions =
@@ -370,24 +370,6 @@ function setCatColor(color) {
             }
 
         }
-    );
-
-
-    catInteractive.classList.remove(
-        "color-changing"
-    );
-
-
-    void catInteractive.offsetWidth;
-
-
-    catInteractive.classList.add(
-        "color-changing"
-    );
-
-
-    clearTimeout(
-        catMessageTimer
     );
 
 
@@ -456,7 +438,7 @@ setInterval(
     function() {
 
         if (
-            Math.random() > 0.65
+            Math.random() > .65
         ) {
 
             const randomMessage =

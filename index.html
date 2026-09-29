@@ -1,3 +1,6 @@
+cd "/Users/loreto/Applications/🦁 /Tech"
+
+cat > index.html <<'EOF'
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -34,13 +37,11 @@
                 >
 
                 <div class="logo-text">
-
                     <strong>TECH</strong>
 
                     <span>
                         Consultoría Académica y Tecnológica
                     </span>
-
                 </div>
 
             </a>
@@ -64,10 +65,11 @@
 
 
     <!-- =========================================
-         CONTENIDO PRINCIPAL
+         MAIN
     ========================================== -->
 
     <main>
+
 
         <!-- =====================================
              HERO
@@ -83,6 +85,7 @@
 
 
             <div class="container hero-content">
+
 
                 <div class="hero-text">
 
@@ -134,8 +137,6 @@
 
                 </div>
 
-
-                <!-- LOGO -->
 
                 <div class="hero-logo">
 
@@ -447,8 +448,6 @@
                     </div>
 
 
-                    <!-- FORMULARIO -->
-
                     <div class="contact-form">
 
                         <form id="contactForm">
@@ -493,31 +492,25 @@
                                     Selecciona una opción
                                 </option>
 
-
                                 <option value="Asesoría académica">
                                     Asesoría académica
                                 </option>
-
 
                                 <option value="Preparatoria en línea">
                                     Preparatoria en línea
                                 </option>
 
-
                                 <option value="Cursos y exámenes">
                                     Cursos y exámenes
                                 </option>
-
 
                                 <option value="Tecnología">
                                     Tecnología
                                 </option>
 
-
                                 <option value="Internet y redes">
                                     Internet y redes
                                 </option>
-
 
                                 <option value="Desarrollo de software">
                                     Desarrollo de software
@@ -560,136 +553,147 @@
 
 
     <!-- =========================================
-         MASCOTA TECNOLÓGICA TECH
+         GATO ANDROIDE TECH
     ========================================== -->
 
     <div
         class="tech-mascot"
         id="catInteractive"
-        style="--cat-color: #39d9ff;"
+        style="--cat-color:#39d9ff;"
     >
-
-
-        <!-- BURBUJA -->
 
         <div
             class="cat-message"
             id="catMessage"
         >
-            ¡Hola! Soy TECH
+            Sistema TECH en línea.
         </div>
 
 
-        <!-- MASCOTA -->
+        <div class="android-cat">
 
-        <div class="tech-bot">
 
-            <div class="bot-aura"></div>
+            <!-- AURA -->
+
+            <div class="android-aura"></div>
 
 
             <!-- ANTENA -->
 
-            <div class="bot-antenna">
+            <div class="android-antenna">
 
                 <span></span>
 
             </div>
 
 
-            <!-- OREJAS -->
+            <!-- OREJA IZQUIERDA -->
 
-            <div class="bot-ear bot-ear-left"></div>
+            <div class="android-ear ear-left">
 
-            <div class="bot-ear bot-ear-right"></div>
+                <div class="ear-light"></div>
+
+            </div>
+
+
+            <!-- OREJA DERECHA -->
+
+            <div class="android-ear ear-right">
+
+                <div class="ear-light"></div>
+
+            </div>
 
 
             <!-- CABEZA -->
 
-            <div class="bot-head">
+            <div class="android-head">
 
 
-                <div class="bot-screen">
+                <div class="android-face">
 
 
-                    <div class="bot-eye bot-eye-left">
+                    <div class="android-eye eye-left">
 
-                        <span class="bot-pupil"></span>
-
-                    </div>
-
-
-                    <div class="bot-eye bot-eye-right">
-
-                        <span class="bot-pupil"></span>
+                        <span class="android-pupil"></span>
 
                     </div>
 
 
-                    <div class="bot-nose"></div>
+                    <div class="android-eye eye-right">
+
+                        <span class="android-pupil"></span>
+
+                    </div>
 
 
-                    <div class="bot-mouth">
+                    <div class="android-nose"></div>
+
+
+                    <div class="android-mouth">
 
                         <span></span>
 
                     </div>
 
 
-                    <div class="bot-face-light"></div>
-
                 </div>
 
 
-                <!-- DETALLES LATERALES -->
+                <div class="head-panel panel-left"></div>
 
-                <div class="head-detail detail-left"></div>
-
-                <div class="head-detail detail-right"></div>
+                <div class="head-panel panel-right"></div>
 
             </div>
 
 
             <!-- CUERPO -->
 
-            <div class="bot-body">
+            <div class="android-body">
 
-                <div class="bot-chest">
 
-                    <span>TECH</span>
+                <div class="android-chest">
 
-                    <div class="chest-line"></div>
+                    <span>
+                        TECH
+                    </span>
+
+                    <div class="energy-core"></div>
+
+                    <div class="chest-detail"></div>
 
                 </div>
 
 
-                <div class="bot-arm arm-left"></div>
+                <div class="android-arm arm-left"></div>
 
-                <div class="bot-arm arm-right"></div>
+                <div class="android-arm arm-right"></div>
 
 
-                <div class="bot-paw paw-left"></div>
+                <div class="android-leg leg-left"></div>
 
-                <div class="bot-paw paw-right"></div>
+                <div class="android-leg leg-right"></div>
+
 
             </div>
 
 
             <!-- COLA -->
 
-            <div class="bot-tail">
+            <div class="android-tail">
 
                 <span></span>
 
             </div>
 
 
-            <!-- PARTÍCULAS -->
+            <!-- LUCES -->
 
-            <div class="bot-particle particle-one"></div>
+            <div class="android-light light-one"></div>
 
-            <div class="bot-particle particle-two"></div>
+            <div class="android-light light-two"></div>
 
-            <div class="bot-particle particle-three"></div>
+            <div class="android-light light-three"></div>
 
         </div>
 
@@ -704,8 +708,13 @@
                 id="catButton"
                 type="button"
             >
-                <span>◈</span>
+
+                <span>
+                    ◈
+                </span>
+
                 Hola
+
             </button>
 
 
@@ -779,11 +788,9 @@
         <div class="container">
 
             <p>
-
                 © <span id="year"></span>
                 TECH -
                 Consultoría Académica y Tecnológica.
-
             </p>
 
 
@@ -800,3 +807,4 @@
 
 </body>
 </html>
+EOF
