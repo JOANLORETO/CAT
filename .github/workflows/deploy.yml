@@ -1,4 +1,4 @@
-name: Deploy CAT to GitHub Pages
+name: Deploy TECH to GitHub Pages
 
 on:
   push:

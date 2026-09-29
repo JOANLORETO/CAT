@@ -38,14 +38,14 @@ contactForm.addEventListener("submit", function(event) {
 
     const asunto =
         encodeURIComponent(
-            "Solicitud de asesoría - CAT"
+            "Solicitud de asesoría - TECH"
         );
 
 
     const cuerpo =
         encodeURIComponent(
 
-            "Hola CAT,\n\n" +
+            "Hola TECH,\n\n" +
 
             "Nombre: " +
             nombre +
@@ -63,7 +63,7 @@ contactForm.addEventListener("submit", function(event) {
             mensaje +
             "\n\n" +
 
-            "Enviado desde el sitio web de CAT."
+            "Enviado desde el sitio web de TECH."
 
         );
 
@@ -95,13 +95,13 @@ const catButton =
 
 const catMessages = [
 
-    "¡Hola! Soy CAT 🐱",
+    "¡Hola! Soy TECH 🐱",
 
     "¡Miau! 😺",
 
     "¿Necesitas ayuda?",
 
-    "¡Bienvenido a CAT!",
+    "¡Bienvenido a TECH!",
 
     "🐾 Estoy aquí para ayudarte",
 
@@ -276,7 +276,7 @@ document.addEventListener(
 setTimeout(function() {
 
     showCatMessage(
-        "¡Hola! Soy la mascota de CAT 🐱"
+        "¡Hola! Soy la mascota de TECH 🐱"
     );
 
 }, 1500);
